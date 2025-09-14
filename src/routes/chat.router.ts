@@ -18,10 +18,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-chatRouter.post(
-  "/message",
-  upload.single("audio"),
-  chatHandler.sendMessageStream
-);
+chatRouter.post("/message", upload.single("audio"), chatHandler.sendMessage);
 
 export default chatRouter;
