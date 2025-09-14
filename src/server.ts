@@ -21,6 +21,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.get("/", (req, res) => {
+  res.send("Welcome to Psychosphere API");
+});
 app.use("/api/v1", appRouter);
 app.use(errorHandlerMiddleware);
 
