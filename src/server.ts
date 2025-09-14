@@ -1,6 +1,4 @@
 import express from "express";
-import https from "https";
-import fs from "fs";
 import connectMongo from "./config/mongodb.js";
 import { errorHandlerMiddleware } from "./middlewares/error.middleware.js";
 import { appRouter } from "./routes/app.router.js";
@@ -27,14 +25,6 @@ app.get("/", (req, res) => {
 app.use("/api/v1", appRouter);
 app.use(errorHandlerMiddleware);
 
-const server = https.createServer(
-  {
-    cert: fs.readFileSync("certs/localhost+2.pem"),
-    key: fs.readFileSync("certs/localhost+2-key.pem"),
-  },
-  app
-);
-
-server.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server is running on https://${HOST}:${PORT}`);
 });
